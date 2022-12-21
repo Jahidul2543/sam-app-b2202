@@ -1,0 +1,11 @@
+Resources:
+  Function:
+    Type: AWS::Serverless::Function
+    Properties:
+      Timeout: 300
+      MemorySize: 128
+      Handler: app.lambda_handler
+      CodeUri: /Users/jahidul/IdeaProjects/DevOpsB2202/sam-demo/sam-app-b2202/hello_world
+      Runtime: python3.9
+      Architectures:
+        - x86_64
