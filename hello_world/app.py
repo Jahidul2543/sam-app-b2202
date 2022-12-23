@@ -1,14 +1,15 @@
 import json
 import requests
+import app2
 
 
 def lambda_handler(event, context):
     path = event.get('path')
 
     if path == "/hello" or path == "/hello/":
-        message = hello()
+        message = app2.hello()
     elif path == "/hi" or path == "/hi/":
-        message = hi()
+        message = app2.hi()
 
     try:
         ip = requests.get("http://checkip.amazonaws.com/")
@@ -27,9 +28,3 @@ def lambda_handler(event, context):
     }
 
 
-def hello():
-    return "Hello from hello function"
-
-
-def hi():
-    return "Hi from hi function"
