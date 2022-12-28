@@ -31,6 +31,16 @@ Resources:
           Properties:
             Path: /hi
             Method: get
+      EventInvokeConfig:
+        DestinationConfig:
+          OnSuccess:
+            Type: SNS
+            Destination: arn:aws:sns:us-east-1:666680140343:B2202-Topic
+#          OnFailure:
+#            Type: Lambda
+#            Destination: !GetAtt DestinationLambda.Arn
+        MaximumEventAgeInSeconds: 60
+        MaximumRetryAttempts: 2
 
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
