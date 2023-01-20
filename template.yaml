@@ -41,6 +41,30 @@ Resources:
 #            Destination: !GetAtt DestinationLambda.Arn
         MaximumEventAgeInSeconds: 60
         MaximumRetryAttempts: 2
+  HeyFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: hello_world/
+      Handler: hey-app.lambda_handler
+      Runtime: python3.9
+      Architectures:
+        - x86_64
+      Events:
+        HiWorld:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /hey
+            Method: get
+      EventInvokeConfig:
+        DestinationConfig:
+          OnSuccess:
+            Type: SNS
+            Destination: arn:aws:sns:us-east-1:666680140343:B2202-Topic
+        #          OnFailure:
+        #            Type: Lambda
+        #            Destination: !GetAtt DestinationLambda.Arn
+        MaximumEventAgeInSeconds: 60
+        MaximumRetryAttempts: 2
 
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
